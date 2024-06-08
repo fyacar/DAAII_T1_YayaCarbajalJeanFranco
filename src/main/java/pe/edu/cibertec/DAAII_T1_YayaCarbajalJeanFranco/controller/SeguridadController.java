@@ -27,21 +27,22 @@ public class SeguridadController {
     public ResultadoDto registrarUsuario(@RequestBody UsuarioDto usuarioDto){
         String mensaje = "Usuario registrado correctamente";
         boolean respuesta = true;
+
         try {
+            // Convertir UsuarioDto a Usuario
             Usuario usuario = new Usuario();
+            usuario.setIdusuario(usuarioDto.getIdusuario());
             usuario.setNombres(usuarioDto.getNombres());
             usuario.setApellidos(usuarioDto.getApellidos());
-            if(usuarioDto.getIdusuario() > 0){
-                usuario.setIdusuario(usuarioDto.getIdusuario());
-                usuario.setActivo(usuarioDto.getActivo());
-                usuarioService.actualizarUsuario(usuario);
-            }else{
-                usuario.setNomusuario(usuarioDto.getNomusuario());
-                usuario.setEmail(usuarioDto.getEmail());
-                usuarioService.guardarUsuario(usuario);
-            }
-        }catch (Exception ex){
-            mensaje = "Usuario no registrado, error en la BD";
+            usuario.setNomusuario(usuarioDto.getNomusuario());
+            usuario.setEmail(usuarioDto.getEmail());
+            usuario.setPassword(usuarioDto.getPassword());
+            usuario.setActivo(usuarioDto.getActivo());
+
+            // Guardar usuario
+            usuarioService.guardarUsuario(usuario);
+        } catch (Exception ex) {
+            mensaje = "Usuario no registrado, error en la BD" + ex.getLocalizedMessage();
             respuesta = false;
         }
         return ResultadoDto.builder().mensaje(mensaje).respuesta(respuesta).build();

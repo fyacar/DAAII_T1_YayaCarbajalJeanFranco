@@ -27,7 +27,9 @@ public class SecurityConfig {
                                                 "/resources/**",
                                                 "/static/**",
                                                 "/css/**",
-                                                "/js/**")
+                                                "/js/**",
+                                                "/auth/registro",
+                                                "/seguridad/usuario")
                                         .permitAll()
                                         .anyRequest()
                                         .authenticated()

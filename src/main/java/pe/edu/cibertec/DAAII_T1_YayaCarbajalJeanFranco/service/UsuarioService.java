@@ -30,8 +30,7 @@ public class UsuarioService implements IUsuarioService {
         usuario.setActivo(true);
         Rol usuarioRol = rolRepository.findByNomrol("ADMIN");
         usuario.setRoles(new HashSet<>(Arrays.asList(usuarioRol)));
-        /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
-        usuario.setPassword("miraUsuarioServiceMetodoGuardarUsuario");
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     }
 

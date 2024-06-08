@@ -15,6 +15,10 @@ public class LoginController {
     public String loginSuccess(){
         return "redirect:/auth/dashboard";
     }
+    @GetMapping("/registro")
+    public String registro(){
+        return "auth/registro";
+    }
     @GetMapping("/dashboard")
     public String dashboard(){
         return "auth/home";
